@@ -68,10 +68,13 @@ main.on('click', 'select', function(e) {
   wind.show();
 });
 
+var ajax = require('ajax');
+
 main.on('click', 'down', function(e) {
   var card = new UI.Card();
-  card.title('A Card');
-  card.subtitle('Is a Window');
-  card.body('The simplest window type in Pebble.js.');
+  ajax({ url: 'http://content.guardianapis.com/search?api-key=test', type: 'json' },
+  function(data) {
+    card.body(data.response.status);
+  });
   card.show();
 });
